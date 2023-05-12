@@ -4,6 +4,8 @@
 
 import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
+import axios from 'axios';
+import { log } from 'console';
 
 type Comment = {
   id: string;
@@ -18,7 +20,7 @@ export const allComments = (req: Request, res: Response) => {
   res.status(200).json(allComments);
 };
 
-export const createComment = (req: Request, res: Response) => {
+export const createComment = async (req: Request, res: Response) => {
   const { content } = req.body;
   const { postId } = req.params;
   const id = randomBytes(4).toString('hex');
@@ -29,5 +31,19 @@ export const createComment = (req: Request, res: Response) => {
   const oldComments = comments.get(postId) || [];
   const newComments = [...oldComments, newComment];
   comments.set(postId, newComments);
+  await axios
+    .post('http://localhost:8085/events', {
+      type: 'CommentCreated',
+      data: {
+        ...newComment,
+        postId,
+      },
+    })
+    .catch((err) => console.error(err.message));
   res.status(201).json(newComment);
+};
+
+export const handleEvent = (req: Request, res: Response) => {
+  log('Event Received:', req.body.type);
+  res.send({});
 };
