@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PostCreate from '$lib/components/PostCreate.svelte';
 	import PostList from '$lib/components/PostList.svelte';
+	import { page } from '$app/stores';
 
 	export let data;
 	export let form: any;

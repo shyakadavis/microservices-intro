@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { fly, slide } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 	import type { Post } from '../../utils';
+	import CommentCreate from './CommentCreate.svelte';
 
 	export let post: Post;
 </script>
@@ -9,4 +10,13 @@
 	<h2 class="underline text-lg decoration-dashed">{post.title}</h2>
 
 	<article class="my-5">{post.content}</article>
+
+	<CommentCreate postId={post.id} />
+	<ul>
+		{#each post.comments as comment}
+			<li transition:fade class="my-5">
+				<p>{comment.content}</p>
+			</li>
+		{/each}
+	</ul>
 </section>

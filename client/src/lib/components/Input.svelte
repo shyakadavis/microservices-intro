@@ -3,6 +3,7 @@
 	export let type = 'text';
 	export let name = '';
 	export let id = '';
+	export let value = '';
 </script>
 
 <label class="w-full flex flex-col gap-3" for={id}>
@@ -12,6 +13,7 @@
 		{type}
 		{name}
 		{id}
+		{value}
 		autocomplete="off"
 		required
 	/>
