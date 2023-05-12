@@ -3,7 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	@apply scroll-smooth;
+}
 html,
 body {
-	@apply flex flex-col h-full justify-center items-center bg-[#BDE0FE];
+	@apply flex flex-col h-full justify-center items-center bg-[#BDE0FE] py-20 max-w-screen-md mx-auto;
 }

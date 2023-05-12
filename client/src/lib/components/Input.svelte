@@ -12,5 +12,7 @@
 		{type}
 		{name}
 		{id}
+		autocomplete="off"
+		required
 	/>
 </label>
