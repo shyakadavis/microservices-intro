@@ -8,7 +8,7 @@ export default function PostList() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
-    const res = (await axios.get('http://localhost:8080/posts')) as {
+    const res = (await axios.get('http://localhost:8082/posts')) as {
       data: Post[];
     };
 
@@ -25,9 +25,9 @@ export default function PostList() {
           key={post.id}
           className="rounded-lg bg-[#CDB4DB] shadow-lg p-5"
         >
-          <h2 className="underline text-lg decoration-dashed">{post.title}</h2>
+          <h2 className="text-lg underline decoration-dashed">{post.title}</h2>
           <article className="my-5">{post.content}</article>
-          <CommentList postId={post.id} />
+          <CommentList comments={post.comments} />
           <CommentCreate postId={post.id} />
         </section>
       ))}
