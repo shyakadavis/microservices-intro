@@ -40,7 +40,27 @@ export const createComment = async (req: Request, res: Response) => {
   res.status(201).json(newComment);
 };
 
-export const handleEvent = (req: Request, res: Response) => {
+export const handleEvent = async (req: Request, res: Response) => {
   log('Event Received:', req.body.type);
+  const { type, data } = req.body;
+  if (type === 'CommentModerated') {
+    const { postId, id, status, content } = data;
+    const commentsForPost = comments.get(postId) || [];
+    const comment = commentsForPost.find((comment) => comment.id === id);
+    if (comment) {
+      comment.status = status;
+      await axios
+        .post('http://localhost:8085/events', {
+          type: 'CommentUpdated',
+          data: {
+            id,
+            status,
+            postId,
+            content,
+          },
+        })
+        .catch((err) => console.error(err.message));
+    }
+  }
   res.send({});
 };
