@@ -1,16 +1,5 @@
 import { Request, Response } from 'express';
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  comments: Comment[];
-};
-
-type Comment = {
-  id: string;
-  content: string;
-};
+import { Post } from '../../../utils';
 
 const posts = new Map<string, Post>();
 export const handlePosts = async (req: Request, res: Response) => {
@@ -31,11 +20,12 @@ export const handleEvents = async (req: Request, res: Response) => {
   }
 
   if (type === 'CommentCreated') {
-    const { id, content, postId } = data;
+    const { id, content, postId, status } = data;
     const post = posts.get(postId);
     post?.comments.push({
       id,
       content,
+      status,
     });
   }
 

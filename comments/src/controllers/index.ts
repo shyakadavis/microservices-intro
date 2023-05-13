@@ -6,11 +6,7 @@ import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
 import axios from 'axios';
 import { log } from 'console';
-
-type Comment = {
-  id: string;
-  content: string;
-};
+import { Comment } from '../../../utils';
 
 const comments = new Map<string, Comment[]>();
 
@@ -27,7 +23,8 @@ export const createComment = async (req: Request, res: Response) => {
   const newComment = {
     id,
     content,
-  };
+    status: 'PENDING',
+  } satisfies Comment;
   const oldComments = comments.get(postId) || [];
   const newComments = [...oldComments, newComment];
   comments.set(postId, newComments);

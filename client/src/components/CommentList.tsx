@@ -1,4 +1,4 @@
-import { Comment } from '../utils';
+import { Comment } from '../../../utils';
 
 type Props = {
   comments: Comment[];

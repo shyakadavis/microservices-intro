@@ -6,12 +6,7 @@ import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
 import axios from 'axios';
 import { log } from 'console';
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-};
+import { Post } from '../../../utils';
 
 const posts = new Map<string, Post>();
 
@@ -26,6 +21,7 @@ export const createPost = async (req: Request, res: Response) => {
     id,
     title,
     content,
+    comments: [],
   };
   posts.set(id, newPost);
   await axios
