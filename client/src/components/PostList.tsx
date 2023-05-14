@@ -8,7 +8,7 @@ export default function PostList() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
-    const res = (await axios.get('http://localhost:8082/posts')) as {
+    const res = (await axios.get('http://posts.com/posts')) as {
       data: Post[];
     };
 

@@ -10,7 +10,7 @@ export default function PostCreate() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    await axios.post('http://localhost:8080/posts', {
+    await axios.post('http://posts.com/posts', {
       title,
       content,
     });
