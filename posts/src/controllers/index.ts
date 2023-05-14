@@ -25,7 +25,7 @@ export const createPost = async (req: Request, res: Response) => {
   };
   posts.set(id, newPost);
   await axios
-    .post('http://localhost:8085/events', {
+    .post('http://event-bus-srv:8085/events', {
       type: 'PostCreated',
       data: newPost,
     })
