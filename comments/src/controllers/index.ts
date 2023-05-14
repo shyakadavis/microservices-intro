@@ -29,7 +29,7 @@ export const createComment = async (req: Request, res: Response) => {
   const newComments = [...oldComments, newComment];
   comments.set(postId, newComments);
   await axios
-    .post('http://localhost:8085/events', {
+    .post('http://event-bus-srv:8085/events', {
       type: 'CommentCreated',
       data: {
         ...newComment,
@@ -50,7 +50,7 @@ export const handleEvent = async (req: Request, res: Response) => {
     if (comment) {
       comment.status = status;
       await axios
-        .post('http://localhost:8085/events', {
+        .post('http://event-bus-srv:8085/events', {
           type: 'CommentUpdated',
           data: {
             id,

@@ -8,7 +8,7 @@ export const handleEvent = async (req: Request, res: Response) => {
     const status = data.content.includes('orange') ? 'REJECTED' : 'APPROVED';
 
     await axios
-      .post('http://localhost:8085/events', {
+      .post('http://event-bus-srv:8085/events', {
         type: 'CommentModerated',
         data: {
           ...data,
