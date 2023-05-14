@@ -5,7 +5,7 @@ const postsRouter = Router();
 
 postsRouter.get('/posts', allPosts);
 
-postsRouter.post('/posts', createPost);
+postsRouter.post('/posts/create', createPost);
 
 postsRouter.post('/events', handleEvent);
 
