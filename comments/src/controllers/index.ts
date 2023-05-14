@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
 import axios from 'axios';
 import { log } from 'console';
-import { Comment } from '../../../utils';
+import { Comment } from '../utils';
 
 const comments = new Map<string, Comment[]>();
 

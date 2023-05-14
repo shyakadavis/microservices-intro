@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Post } from '../../../utils';
+import { Post } from '../utils';
 import CommentList from './CommentList';
 import CommentCreate from './CommentCreate';
 

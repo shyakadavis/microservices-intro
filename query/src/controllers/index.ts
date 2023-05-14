@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Post } from '../../../utils';
+import { Post } from '../utils';
 
 const posts = new Map<string, Post>();
 
