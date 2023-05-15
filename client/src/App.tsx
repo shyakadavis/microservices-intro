@@ -7,7 +7,7 @@ function App() {
       <h1 className="text-2xl tracking-wide">Create Post</h1>
       <PostCreate />
       <hr />
-      <h2 className="text-2xl tracking-wide">Posts</h2>
+      <h2 className="my-5 text-2xl tracking-wide">Posts</h2>
       <PostList />
     </section>
   );
