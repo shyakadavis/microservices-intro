@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["depl", "shyakadavis", "skaffold"]
+  "cSpell.words": [
+    "currentuser",
+    "depl",
+    "shyakadavis",
+    "signin",
+    "signout",
+    "skaffold"
+  ]
 }
