@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { validate } from '../middleware';
-import { DatabaseConnectionError } from '../errors';
+import { User } from '../models';
+import { BadRequestError } from '../errors';
 
 const signUpSchema = z.object({
   body: z.object({
@@ -31,8 +32,11 @@ const signUpRouter = Router();
 
 signUpRouter.post('/signup', validate(signUpSchema), async (req, res) => {
   const { email, password } = req.body;
-  throw new DatabaseConnectionError();
-  res.send({ email, password });
+  const existingUser = await User.findOne({ email });
+  if (existingUser) throw new BadRequestError('Email in use');
+  const user = User.build({ email, password });
+  await user.save();
+  res.status(201).send(user);
 });
 
 export default signUpRouter;
