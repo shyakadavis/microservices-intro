@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { z } from 'zod';
+import jwt from 'jsonwebtoken';
+
 import { validate } from '../middleware';
 import { User } from '../models';
 import { BadRequestError } from '../errors';
+
+// TODO: Sanitize input, especially when it comes to trimming whitespace
 
 const signUpSchema = z.object({
   body: z.object({
@@ -36,6 +40,14 @@ signUpRouter.post('/signup', validate(signUpSchema), async (req, res) => {
   if (existingUser) throw new BadRequestError('Email in use');
   const user = User.build({ email, password });
   await user.save();
+  const userJwt = jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    process.env.JWT_KEY!,
+  );
+  req.session = { jwt: userJwt };
   res.status(201).send(user);
 });
 
