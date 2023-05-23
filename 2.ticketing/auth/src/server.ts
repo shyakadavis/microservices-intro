@@ -1,5 +1,6 @@
-import ExpressConfig from './express/express.config';
 import mongoose from 'mongoose';
+
+import ExpressConfig from './express/express.config';
 
 const app = ExpressConfig();
 const PORT = 3000;
